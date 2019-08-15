@@ -1,0 +1,6 @@
+{
+    "src": "../src",
+    "dest": "../dist",
+    "proxy": "dev.domain.tld",
+    "port": 3000
+}
