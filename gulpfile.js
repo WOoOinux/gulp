@@ -43,9 +43,16 @@ gulp.task('js', function() {
 });
 
 gulp.task('minify-js', function() {
-    return gulp.src(src + '/assets/**/*.js')
+    return gulp.src(src + '/assets/**/*.front.js')
     .pipe(plugins.uglify()) // Minify JS
     .pipe(plugins.concat('scripts.min.js')) // Concatenate all JS file in one
+    .pipe(gulp.dest(dest + '/'));
+});
+
+gulp.task('minify-admin-js', function() {
+    return gulp.src(src + '/assets/**/*.admin.js')
+    .pipe(plugins.uglify()) // Minify JS
+    .pipe(plugins.concat('scripts.admin.min.js')) // Concatenate all JS file in one
     .pipe(gulp.dest(dest + '/'));
 });
 
@@ -58,7 +65,7 @@ gulp.task('sync', function() {
         proxy: config.proxy,
         port: config.port
     });
-    gulp.watch(src + '/**/*', gulp.series(['css', 'minify-css', 'js', 'minify-js'])).on('change', browserSync.reload);
+    gulp.watch(src + '/**/*', gulp.series(['css', 'minify-css', 'js', 'minify-js', 'minify-admin-js'])).on('change', browserSync.reload);
 });
 
 // Default task
