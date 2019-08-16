@@ -46,7 +46,7 @@ gulp.task('minify-js', function() {
     return gulp.src(src + '/assets/**/*.js')
     .pipe(plugins.uglify()) // Minify JS
     .pipe(plugins.concat('scripts.min.js')) // Concatenate all JS file in one
-    .pipe(gulp.dest(dest + '/assets/'));
+    .pipe(gulp.dest(dest + '/'));
 });
 
 gulp.task('images', function() {
