@@ -2,6 +2,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var jsonfile = require('jsonfile');
+var uglify = require('gulp-uglify-es').default;
 
 // Plugins
 var plugins = require('gulp-load-plugins')(); // Include all plugins from package.json
@@ -44,7 +45,7 @@ gulp.task('js', function() {
 
 gulp.task('minify-js', function() {
     return gulp.src(src + '/assets/**/*.js')
-    .pipe(plugins.uglify()) // Minify JS
+    .pipe(uglify()) // Minify JS
     .pipe(plugins.concat('scripts.min.js')) // Concatenate all JS file in one
     .pipe(gulp.dest(dest + '/'));
 });
