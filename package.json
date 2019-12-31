@@ -19,7 +19,7 @@
     "gulp-sass": "latest",
     "gulp-sass-glob": "latest",
     "gulp-strip-css-comments": "latest",
-    "gulp-uglify": "latest",
+    "gulp-uglify-es": "latest",
     "jshint": "latest",
     "jsonfile": "latest"
   }
