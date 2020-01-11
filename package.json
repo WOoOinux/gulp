@@ -22,5 +22,10 @@
     "gulp-uglify-es": "latest",
     "jshint": "latest",
     "jsonfile": "latest"
-  }
+    },
+    "browserslist": [
+        "last 2 versions",
+        "> 1%",
+        "ie 11"
+    ]
 }
