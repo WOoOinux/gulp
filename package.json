@@ -21,7 +21,8 @@
     "gulp-strip-css-comments": "latest",
     "gulp-uglify-es": "latest",
     "jshint": "latest",
-    "jsonfile": "latest"
+    "jsonfile": "latest",
+    "sass-inline-svg": "latest"
     },
     "browserslist": [
         "last 2 versions",

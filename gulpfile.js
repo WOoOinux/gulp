@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var jsonfile = require('jsonfile');
 var uglify = require('gulp-uglify-es').default;
+var inliner = require('sass-inline-svg');
 
 // Plugins
 var plugins = require('gulp-load-plugins')(); // Include all plugins from package.json
@@ -19,7 +20,11 @@ var dest = config.dest; // Compile folder
 gulp.task('css', function () {
   return gulp.src(src + '/main.scss')
     .pipe(plugins.sassGlob()) // Allow glob import for SASS
-    .pipe(plugins.sass()) // Compile CSS
+    .pipe(plugins.sass({
+        functions: {
+            svg: inliner(src + '/_assets/svg/', [])
+        }
+    })) // Compile CSS
     .pipe(plugins.csscomb()) // Re-ordonate properties
     .pipe(plugins.cssbeautify({indent: '    '})) // Re-indent
     .pipe(plugins.autoprefixer()) // Auto-prefidx CSS3 properties
