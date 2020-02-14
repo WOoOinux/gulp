@@ -1,6 +1,7 @@
 // Required
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
+var strip = require('gulp-strip-comments');
 var jsonfile = require('jsonfile');
 var uglify = require('gulp-uglify-es').default;
 var inliner = require('sass-inline-svg');
@@ -22,7 +23,7 @@ gulp.task('css', function () {
     .pipe(plugins.sassGlob()) // Allow glob import for SASS
     .pipe(plugins.sass({
         functions: {
-            svg: inliner(src + '/_assets/svg/', [])
+            svg: inliner(src + '/assets/svg/', [])
         }
     })) // Compile CSS
     .pipe(plugins.csscomb()) // Re-ordonate properties
@@ -50,8 +51,9 @@ gulp.task('js', function() {
 
 gulp.task('minify-js', function() {
     return gulp.src(src + '/**/*.js')
+    .pipe(strip()) // Remove comments
     .pipe(uglify()) // Minify JS
-    .pipe(plugins.concat('scripts.min.js')) // Concatenate all JS file in one
+    //.pipe(plugins.concat('scripts.min.js')) // Concatenate all JS file in one
     .pipe(gulp.dest(dest + '/'));
 });
 

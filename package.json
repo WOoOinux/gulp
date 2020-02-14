@@ -18,6 +18,7 @@
     "gulp-rename": "latest",
     "gulp-sass": "latest",
     "gulp-sass-glob": "latest",
+    "gulp-strip-comments": "latest",
     "gulp-strip-css-comments": "latest",
     "gulp-uglify-es": "latest",
     "jshint": "latest",
