@@ -29,32 +29,27 @@ gulp.task('css', function () {
     .pipe(plugins.csscomb()) // Re-ordonate properties
     .pipe(plugins.cssbeautify({indent: '    '})) // Re-indent
     .pipe(plugins.autoprefixer()) // Auto-prefidx CSS3 properties
-    .pipe(gulp.dest(dest + '/'))
+    .pipe(gulp.dest(dest + '/styles/'))
     .pipe(browserSync.stream()); // Sync browser
 });
 
 gulp.task('minify-css', function () {
-    return gulp.src(dest + '/main.css')
+    return gulp.src(dest + '/styles/main.css')
     .pipe(plugins.stripCssComments()) // Remove comments
     .pipe(plugins.csso()) // Minify CSS
     .pipe(plugins.rename({suffix: '.min'})) // Create min.css file
-    .pipe(gulp.dest(dest + '/'));
+    .pipe(gulp.dest(dest + '/styles/'));
 });
 
 gulp.task('js', function() {
-    return gulp.src(src + '/**/*.js')
+    return gulp.src(src + '/_assets/js/*.js')
     .pipe(plugins.jshint()) // Check JS files for convention rules
     .pipe(plugins.jshint.reporter('default')) // Report errors
-    .pipe(plugins.babel()); // Compile JS for old browsers
-    // .pipe(gulp.dest(dest + '/'));
-});
-
-gulp.task('minify-js', function() {
-    return gulp.src(src + '/**/*.js')
+    .pipe(plugins.babel()) // Compile JS for old browsers
     .pipe(strip()) // Remove comments
     .pipe(uglify()) // Minify JS
-    //.pipe(plugins.concat('scripts.min.js')) // Concatenate all JS file in one
-    .pipe(gulp.dest(dest + '/'));
+    .pipe(plugins.rename({suffix: '.min'})) // Create min.js file
+    .pipe(gulp.dest(dest + '/js/'));
 });
 
 gulp.task('sync', function() {
@@ -62,7 +57,7 @@ gulp.task('sync', function() {
         proxy: config.proxy,
         port: config.port
     });
-    gulp.watch(src + '/**/*', gulp.series(['css', 'minify-css', 'js', 'minify-js'])).on('change', browserSync.reload);
+    gulp.watch(src + '/**/*', gulp.series(['css', 'minify-css', 'js'])).on('change', browserSync.reload);
 });
 
 // Default task
