@@ -23,7 +23,7 @@ gulp.task('css', function () {
     .pipe(plugins.sassGlob()) // Allow glob import for SASS
     .pipe(plugins.sass({
         functions: {
-            svg: inliner(src + '/assets/svg/', [])
+            'inline-svg': inliner(src + '/assets/svg/', [])
         }
     })) // Compile CSS
     .pipe(plugins.csscomb()) // Re-ordonate properties
@@ -45,7 +45,7 @@ gulp.task('js', function() {
     return gulp.src(src + '/**/*.js')
     .pipe(plugins.jshint()) // Check JS files for convention rules
     .pipe(plugins.jshint.reporter('default')) // Report errors
-    .pipe(plugins.babel()); // Compile JS for old browsers
+    .pipe(plugins.babel({presets: [['@babel/preset-env']]})); // Compile JS for old browsers
     // .pipe(gulp.dest(dest + '/'));
 });
 
